@@ -2,7 +2,9 @@
 
 Last updated: July 30, 2026
 
-## Status: Active - Phase 1 (Career stability + first agency client)
+## Status: Active - Project Zero v0.9 (Foundation Complete), Implementation Mode
+
+Architecture discussions are paused as of this milestone unless a real problem surfaces during building. Success is now measured by working software, working automations, completed repositories, landed clients, and landed jobs — not architecture elegance. See CHANGELOG.md for the full record of this milestone.
 
 ## What's actually built and working
 
@@ -39,8 +41,16 @@ Last updated: July 30, 2026
 
 ## Immediate next actions (in priority order)
 
+**Session 2 — Career Engine** (highest priority, directly affects income)
 1. Get Anthropic API key -> build Career Ops Agent 2 (resume + cover letter tailoring, pulling from the master resume)
-2. Colburn Auctions: client to confirm the ~35 unaccounted-for lot numbers and finish uploading photos through admin
+2. Finish priority GitHub cybersecurity portfolio repos
 3. Apply the drafted LinkedIn content to the live profile
-4. Close the remaining v1.0 governance gaps identified in an architecture review: no bootstrap/template mechanism for new repos to actually derive from this repo's standards, no security standards doc, no test baseline, no versioning/changelog for Project Zero itself, no decision-authority rule for Claude/ChatGPT conflicts
-5. Continue populating this repo as the standing source of truth, and update this file at the end of any session with real progress
+4. Resume variants and job application workflow
+
+**Session 3 — Documentation System** (not an agent — a system: generates docs, updates PROJECT_STATE/CHANGELOG/ADRs, organizes repos)
+
+**Session 4 — OpenClaw Core** (Agent Contract, Prompt Contract, Memory Contract — defined against real agents now that enough exist to build against, not speculatively)
+
+**Ongoing / not session-bound**
+- Colburn Auctions: client to confirm the ~35 unaccounted-for lot numbers and finish uploading photos through admin
+- Update this file at the end of any session with real progress, per 01_GOVERNANCE.md's standing instruction

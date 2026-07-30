@@ -1,5 +1,16 @@
 # Architecture Decision Records
 
+## Index
+
+| # | Title | Status |
+|---|---|---|
+| 001 | GitHub as the single engineering repository | Accepted |
+| 002 | Public professional identity | Accepted |
+| 003 | Medium-sized BVOS agent org (15 agents), department-based | Accepted, in progress |
+| 004 | No automated job-application submission | Accepted, permanent |
+
+---
+
 ## ADR-001: GitHub as the single engineering repository
 
 **Decision**: Project Zero (this repo) is the source of truth for documentation, architecture, decisions, and roadmap - not ChatGPT, not Claude, not Google Drive.
