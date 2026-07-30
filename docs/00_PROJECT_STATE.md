@@ -1,6 +1,6 @@
 # Project State
 
-Last updated: July 2026
+Last updated: July 30, 2026
 
 ## Status: Active - Phase 1 (Career stability + first agency client)
 
@@ -20,10 +20,18 @@ Last updated: July 2026
 - NOT yet built: Resume/cover letter tailoring agent (blocked on Anthropic API key), interview prep agent
 
 **Venture #16 - AI Web & App Agency**
-- First live client: Colburn Auctions (colburnauctions.com) - domain, Cloudflare DNS, Vercel hosting, Zoho Mail all live
-- Email deliverability fixed: SPF corrected, DKIM verified, leftover registrar MX forwarding removed
-- First site version (v0.dev generated) felt too premium/polished to the client - rebuilt as a simpler, ledger/catalog-style design in the same brand colors (royal blue + forest green)
-- Blocked on: client's own story text, photos, live-auction platform confirmation (HiBid/Proxibid/LiveAuctioneers/Invaluable), physical address
+- First live client: Colburn Auctions (colburnauctions.com) - fully live, real content, real client, no longer blocked
+- Site: the actual live design is the v0.dev-generated one (auction-house-homepage-design project), rebuilt with Pat's real content (bio, Why Choose Us, Five Steps, Sell With Us with real client stories), no placeholder stats, no personal photo per client request
+- Catalog + admin system live: Next.js app connected to a Supabase project (free tier) - `lots` and `lot_photos` tables, RLS policies (public sees published only), storage bucket for photos with automatic HEIC-to-JPEG conversion on upload (client uses an iPad, HEIC is its default format)
+- All 272 original catalog lots transcribed and seeded as drafts; client is writing/correcting descriptions and uploading photos himself through the admin dashboard as he goes; "Add New Lot" feature added for items outside the original 272, including photo-only uncatalogued items
+- 7+ lots published with real photos so far, catalog page paginated (24/page)
+- Live-auction platform confirmed: LiveAuctioneers (per the client's own printed event flyer, now embedded on the site)
+- Domain crisis and recovery: colburnauctions.com was suspended by Namecheap for unverified WHOIS contact info (the actual root cause of a site outage that looked like a DNS problem at first) - contact verified, Cloudflare zone rebuilt from scratch (junk NS records from the suspension process removed, A/CNAME records corrected to point at Vercel), Zoho Mail's MX/SPF/DKIM/DMARC records preserved through the rebuild
+- Open items: client still confirming ~35 lots with no description sheet on file (lots 1-11, 17-24, 84-88, 94, 132-135, 215-219, 235) and two numbering overlaps (250/251, 264/265); most of the catalog still needs photos uploaded
+
+**Career development - LinkedIn**
+- LinkedIn optimization content drafted (headline, About, experience rewrites, skills list, Featured section plan) from the latest master resume version
+- Not yet applied to the live profile - manual copy-paste, or via Claude in Chrome extension (client was walked through installing it) once set up
 
 ## Open decisions
 
@@ -32,6 +40,7 @@ Last updated: July 2026
 ## Immediate next actions (in priority order)
 
 1. Get Anthropic API key -> build Career Ops Agent 2 (resume + cover letter tailoring, pulling from the master resume)
-2. Receive cybersecurity mentor's input (expected weekend) -> fold into master resume
-3. Receive Pat's content for Colburn Auctions -> finalize and deploy the rebuilt site
-4. Continue populating this repo as the standing source of truth
+2. Colburn Auctions: client to confirm the ~35 unaccounted-for lot numbers and finish uploading photos through admin
+3. Apply the drafted LinkedIn content to the live profile
+4. Close the remaining v1.0 governance gaps identified in an architecture review: no bootstrap/template mechanism for new repos to actually derive from this repo's standards, no security standards doc, no test baseline, no versioning/changelog for Project Zero itself, no decision-authority rule for Claude/ChatGPT conflicts
+5. Continue populating this repo as the standing source of truth, and update this file at the end of any session with real progress
