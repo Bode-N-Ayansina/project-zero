@@ -1,6 +1,6 @@
 # Project State
 
-Last updated: July 30, 2026
+Last updated: August 2, 2026
 
 ## Status: Active - Project Zero v0.9 (Foundation Complete), Implementation Mode
 
@@ -16,10 +16,12 @@ Architecture discussions are paused as of this milestone unless a real problem s
 **Career Ops (personal infrastructure, not a venture)**
 - Job Discovery Agent: live in n8n, searches 19 categories via Adzuna (IT, cybersecurity, management, AI/automation, general labor, construction), scores by fit and distance, writes to a Google Sheet tracker with dashboard stats
 - Dedup working (Append or Update matched on Adzuna ID)
-- Daily 7am schedule trigger published
-- Telegram digest confirmed delivering to phone
+- Security fix applied: the Adzuna app_id/app_key were hardcoded in plaintext in the HTTP node's query parameters (flagged by a note left in the workflow itself) - moved to a proper n8n Custom Auth credential, verified working end-to-end with real live job data
+- Google Sheets OAuth credential had expired/been revoked - reconnected, and the append node's column schema (silently dropped during the credential fix) restored - full pipeline (search -> dedupe/filter/score -> write to sheet -> Telegram digest) tested successfully end to end
+- Workflow itself was sitting inactive despite being "designed" for daily runs - never actually activated until this session; activation (Publish) still pending a manual approval click in the n8n UI
+- In progress: redesigned trigger from a single fixed 7am run to two runs/day (6am, 2pm) gated by a completion check - the afternoon run only fires if every lot/job from the morning batch has been moved off "Ready to Apply" status, with a Telegram skip-notice if not. Adzuna's free tier (~1,000 calls/month, ~33/day; this search uses 19 calls/run) is the hard constraint behind capping it at 2 runs/day rather than something more frequent. New workflow version validated but not yet pushed/tested/activated.
 - Master resume built - combined from 11 prior tailored versions into one canonical source
-- NOT yet built: Resume/cover letter tailoring agent (blocked on Anthropic API key), interview prep agent
+- NOT yet built: Resume/cover letter tailoring agent (blocked on Anthropic API key - key exists from Finance OS project, reusable, just needs wiring in), interview prep agent
 
 **Venture #16 - AI Web & App Agency**
 - First live client: Colburn Auctions (colburnauctions.com) - fully live, real content, real client, no longer blocked
@@ -41,11 +43,12 @@ Architecture discussions are paused as of this milestone unless a real problem s
 
 ## Immediate next actions (in priority order)
 
-**Session 2 — Career Engine** (highest priority, directly affects income)
-1. Get Anthropic API key -> build Career Ops Agent 2 (resume + cover letter tailoring, pulling from the master resume)
-2. Finish priority GitHub cybersecurity portfolio repos
-3. Apply the drafted LinkedIn content to the live profile
-4. Resume variants and job application workflow
+**Session 2 — Career Engine** (highest priority, directly affects income) — IN PROGRESS
+1. Career Ops Agent 1: push/test/activate the gated 2-run/day version (6am + 2pm with completion gate), confirm the Publish approval goes through, verify the gate actually blocks/allows correctly on a real second run
+2. Get Anthropic API key wired in -> build Career Ops Agent 2 (resume + cover letter tailoring, pulling from the master resume) - key already exists from Finance OS, reusable
+3. Finish priority GitHub cybersecurity portfolio repos
+4. Apply the drafted LinkedIn content to the live profile
+5. Resume variants and job application workflow
 
 **Session 3 — Documentation System** (not an agent — a system: generates docs, updates PROJECT_STATE/CHANGELOG/ADRs, organizes repos)
 
