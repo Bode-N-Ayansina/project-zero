@@ -1,6 +1,6 @@
 # Project State
 
-Last updated: August 2, 2026
+Last updated: August 3, 2026
 
 ## Status: Active - Project Zero v0.9 (Foundation Complete), Implementation Mode
 
@@ -32,6 +32,11 @@ Architecture discussions are paused as of this milestone unless a real problem s
 - Live-auction platform confirmed: LiveAuctioneers (per the client's own printed event flyer, now embedded on the site)
 - Domain crisis and recovery: colburnauctions.com was suspended by Namecheap for unverified WHOIS contact info (the actual root cause of a site outage that looked like a DNS problem at first) - contact verified, Cloudflare zone rebuilt from scratch (junk NS records from the suspension process removed, A/CNAME records corrected to point at Vercel), Zoho Mail's MX/SPF/DKIM/DMARC records preserved through the rebuild
 - Open items: client still confirming ~35 lots with no description sheet on file (lots 1-11, 17-24, 84-88, 94, 132-135, 215-219, 235) and two numbering overlaps (250/251, 264/265); most of the catalog still needs photos uploaded
+- UPDATE: client finished writing all 310 lot descriptions (all gaps filled, both numbering overlaps resolved) - loaded into Supabase, titles separated from descriptions, sort order bug fixed (lot_number is text, was sorting alphabetically not numerically)
+- Client finished uploading photos for all 310 lots through admin (1,482 individual photos total, confirmed via count)
+- LiveAuctioneers catalog spreadsheet (CSV + XLSX, lot number/title/description, all 310 lots correctly ordered) generated and delivered
+- NOT yet done: bulk photo export for LiveAuctioneers' separate image upload. This requires a real n8n build (no existing tool can bulk-download from Supabase Storage) - plan: query all 1,482 photos directly via Supabase (bypasses a Postgres n8n credential that turned out to point at an unrelated database, confirmed by testing), feed the list into an n8n workflow that downloads/renames-to-lot-number/batches (~100 photos per batch)/zips/emails each batch. Tested the credential issue and confirmed the real photo count; the actual download-batch-zip-email pipeline has NOT been built yet - deliberately deferred to a fresh session given this conversation's length, to avoid running out of room mid-build on a multi-step automation
+- LiveAuctioneers seller registration still not submitted (setup details doc already prepared with everything decided so far - dates, terms, buyer's premium; bid increments still need Pat's input)
 
 **Career development - LinkedIn**
 - LinkedIn optimization content drafted (headline, About, experience rewrites, skills list, Featured section plan) from the latest master resume version
@@ -55,5 +60,6 @@ Architecture discussions are paused as of this milestone unless a real problem s
 **Session 4 — OpenClaw Core** (Agent Contract, Prompt Contract, Memory Contract — defined against real agents now that enough exist to build against, not speculatively)
 
 **Ongoing / not session-bound**
-- Colburn Auctions: client to confirm the ~35 unaccounted-for lot numbers and finish uploading photos through admin
+- START HERE NEXT (fresh session recommended - this is a real multi-step n8n build): Colburn Auctions photo export for LiveAuctioneers. Full plan already worked out: query all 1,482 photos from Supabase directly (lot_number, storage_path, created_at for ordering - the sort_order column is unreliable, stuck at 0), build an n8n workflow (Postgres node's existing "Postgres account" credential does NOT work - confirmed it points at an unrelated database, don't reuse it) that takes the photo list, downloads each file from its public Supabase Storage URL, renames to match lot number + letter suffix (1a, 1b, 2a...), batches ~100 photos at a time via Compression node into zips, and emails each batch via Gmail (credential already exists in n8n). Test on one small batch first before running all ~15 batches.
+- LiveAuctioneers seller registration still needs submitting - setup details already prepared (see LiveAuctioneers-Setup-Ready.md), only open item is bid increments
 - Update this file at the end of any session with real progress, per 01_GOVERNANCE.md's standing instruction
