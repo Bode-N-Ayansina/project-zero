@@ -11,6 +11,7 @@ Architecture discussions are paused as of this milestone unless a real problem s
 **BVOS foundation**
 - Company Constitution, 8 departments, 15 agent profiles, 16-venture registry drafted (BVOS Master Blueprint v1)
 - OpenClaw running on second PC, 3 agents live (Executive Brain, Client Relations, Automation Engineer), connected via Telegram bot
+- MILESTONE: Agent 09 given real, live n8n API access (not just JSON-generation-for-manual-import as originally designed). Verified via a real read-then-write test: listed all 14 workflows on the instance, activated the correct Career Ops workflow (it had never actually been turned on despite being fixed/tested), archived 7 confirmed-duplicate workflows without deleting anything, verified every action with a re-fetch rather than just claiming success. Also confirmed via Agent 09 that the Colburn photo export (see above) was already built and successfully run twice in a separate session. GitHub token and v0.dev API key not yet configured for it.
 - Org size: Medium (15 agents) - decided, not fully built out yet
 
 **Career Ops (personal infrastructure, not a venture)**
@@ -35,8 +36,8 @@ Architecture discussions are paused as of this milestone unless a real problem s
 - UPDATE: client finished writing all 310 lot descriptions (all gaps filled, both numbering overlaps resolved) - loaded into Supabase, titles separated from descriptions, sort order bug fixed (lot_number is text, was sorting alphabetically not numerically)
 - Client finished uploading photos for all 310 lots through admin (1,482 individual photos total, confirmed via count)
 - LiveAuctioneers catalog spreadsheet (CSV + XLSX, lot number/title/description, all 310 lots correctly ordered) generated and delivered
-- NOT yet done: bulk photo export for LiveAuctioneers' separate image upload. This requires a real n8n build (no existing tool can bulk-download from Supabase Storage) - plan: query all 1,482 photos directly via Supabase (bypasses a Postgres n8n credential that turned out to point at an unrelated database, confirmed by testing), feed the list into an n8n workflow that downloads/renames-to-lot-number/batches (~100 photos per batch)/zips/emails each batch. Tested the credential issue and confirmed the real photo count; the actual download-batch-zip-email pipeline has NOT been built yet - deliberately deferred to a fresh session given this conversation's length, to avoid running out of room mid-build on a multi-step automation
-- LiveAuctioneers seller registration still not submitted (setup details doc already prepared with everything decided so far - dates, terms, buyer's premium; bid increments still need Pat's input)
+- DONE (completed in a separate session using a handoff prompt, confirmed via Agent 09 read-only inspection): photo export for LiveAuctioneers. Workflow "Colburn Auctions - LiveAuctioneers Photo Export" (n8n ID 2dvEy2HHfLpTkjBZ) built, tested, and run successfully twice (executions #78 and #80) - all 1,482 photos across 310 lots, batched into 193 zip files of correctly-renamed images, emailed to nurudeenayansina@gmail.com. Structurally complete: manual trigger -> batch descriptor build -> split into batches -> expand to photo URLs -> download -> rename to lot number -> recombine -> zip -> email per batch -> completion summary email.
+- LiveAuctioneers seller registration still not submitted (setup details doc already prepared - dates, terms, buyer's premium; bid increments still need Pat's input); call prep doc also prepared
 
 **Career development - LinkedIn**
 - LinkedIn optimization content drafted (headline, About, experience rewrites, skills list, Featured section plan) from the latest master resume version
@@ -60,6 +61,5 @@ Architecture discussions are paused as of this milestone unless a real problem s
 **Session 4 — OpenClaw Core** (Agent Contract, Prompt Contract, Memory Contract — defined against real agents now that enough exist to build against, not speculatively)
 
 **Ongoing / not session-bound**
-- START HERE NEXT (fresh session recommended - this is a real multi-step n8n build): Colburn Auctions photo export for LiveAuctioneers. Full plan already worked out: query all 1,482 photos from Supabase directly (lot_number, storage_path, created_at for ordering - the sort_order column is unreliable, stuck at 0), build an n8n workflow (Postgres node's existing "Postgres account" credential does NOT work - confirmed it points at an unrelated database, don't reuse it) that takes the photo list, downloads each file from its public Supabase Storage URL, renames to match lot number + letter suffix (1a, 1b, 2a...), batches ~100 photos at a time via Compression node into zips, and emails each batch via Gmail (credential already exists in n8n). Test on one small batch first before running all ~15 batches.
 - LiveAuctioneers seller registration still needs submitting - setup details already prepared (see LiveAuctioneers-Setup-Ready.md), only open item is bid increments
 - Update this file at the end of any session with real progress, per 01_GOVERNANCE.md's standing instruction
