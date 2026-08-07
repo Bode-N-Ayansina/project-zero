@@ -1,12 +1,19 @@
 # Project State
 
-Last updated: August 3, 2026
+Last updated: August 7, 2026
 
 ## Status: Active - Project Zero v0.9 (Foundation Complete), Implementation Mode
 
 Architecture discussions are paused as of this milestone unless a real problem surfaces during building. Success is now measured by working software, working automations, completed repositories, landed clients, and landed jobs — not architecture elegance. See CHANGELOG.md for the full record of this milestone.
 
 ## What's actually built and working
+
+**Personal context (new, affects available hours for everything else)**
+- Took a temporary full-time painting job at Bombardier aircraft maintenance in Windsor, CT (standard daytime shift, ~7am-3:30pm) while continuing the cybersecurity job search - real income now, changes the daily schedule
+- Built a personal routine: workout after work (home equipment), cybersecurity/portfolio study in the evening, weekends for longer lab work
+- Finance & habit tracking system built (Google Sheets-style xlsx: income/expenses/investments/weekly review/monthly review/daily habit tracker) - not yet connected to Finance OS (the planned BVOS venture) but conceptually linked; Finance OS automation itself not yet built
+- Content pipeline started: a Content Tracker (Google Sheet) exists with real entries (first content piece - a Colburn Auctions case study - drafted in 3 formats: LinkedIn, blog, short caption). Full automated pipeline (Agent 09 auto-logging finished work as content) not yet built, deliberately deferred
+- Content creation strategy itself (platforms, cadence, brand direction) explicitly flagged for a dedicated deep-dive session later, not yet planned in detail
 
 **BVOS foundation**
 - Company Constitution, 8 departments, 15 agent profiles, 16-venture registry drafted (BVOS Master Blueprint v1)
@@ -60,6 +67,10 @@ Architecture discussions are paused as of this milestone unless a real problem s
 
 **Session 4 — OpenClaw Core** (Agent Contract, Prompt Contract, Memory Contract — defined against real agents now that enough exist to build against, not speculatively)
 
-**Ongoing / not session-bound**
-- LiveAuctioneers seller registration still needs submitting - setup details already prepared (see LiveAuctioneers-Setup-Ready.md), only open item is bid increments
+**Ongoing / not session-bound — TOMORROW'S REAL PRIORITIES**
+1. Check Career Ops Agent 1 actually ran at 7am (first time it's ever been genuinely active) - confirm the Telegram digest arrived
+2. Get the 193 photo-export zip emails organized (ask Agent 09 to list the successful run's email subjects first, then download) and finish the LiveAuctioneers seller registration (setup + call-prep docs already exist, only bid increments still open)
+3. Check lot 46 on the live site now that the Vercel image-quota bug is fixed - confirm if it's really the wrong photo or was a display artifact
+4. Finish giving Agent 09 real access: GitHub fine-grained token (scoped, not broad) and v0.dev API key, same careful pattern as the n8n key
+5. Capture real screenshots for the drafted Colburn content pieces (homepage hero, admin dashboard) and post the two "Ready to Post" pieces from the Content Tracker
 - Update this file at the end of any session with real progress, per 01_GOVERNANCE.md's standing instruction
